@@ -12,7 +12,7 @@
 from setuptools import setup
 
 def readme():
-	with open("README.rst", "r", encoding="UTF-8-sig") as f:
+	with open("README.md", "r", encoding="UTF-8-sig") as f:
 		return f.read()
 
 setup(
@@ -40,4 +40,5 @@ setup(
 	version = "0.2019.8.22",
 	zip_safe = False,
 	long_description = readme(),
+	long_description_content_type="text/markdown",
 )

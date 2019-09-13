@@ -1,11 +1,14 @@
 {
 	"language": "python3",
 	"name": "jk_flexdata",
-	"version": "0.2019.8.22",
+	"version": "0.2019.9.13",
 	"meta": {
-		"description": "This python module ...",
+		"description": "This python module provides a special dictionary like data data structure that can be easily used to access and modify values of configurations and settings.",
 		"keywords": [
-			"..."
+			"dictionary",
+			"dict",
+			"json",
+			"configuration"
 		],
 		"license": "Apache 2.0",
 		"development_status": "stable",
@@ -23,11 +26,12 @@
 		{
 			"type": "github",
 			"user": "jkpubsrc",
-			"project": "........",
+			"project": "python-module-jk-flexdata",
 			"devon_publish": false
 		},
 		{
 			"type": "pypy",
+			"project": "jk-flexdata",
 			"devon_publish": false
 		}
 	],
@@ -40,6 +44,9 @@
 	},
 	"requirements": {
 		"python_packages": [
+		],
+		"python_packages_optional": [
+			"jk_jsoncfghelper2"
 		],
 		"python_packages_dev": [
 		]

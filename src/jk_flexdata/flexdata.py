@@ -62,24 +62,87 @@ class FlexObject(object):
 				self.__dict__[key] = value
 	#
 
+	def _getByPath(self, path):
+		if len(path) == 0:
+			return None
+
+		nextKey = path[0]
+		if nextKey in self.__dict__.keys():
+			v = self.__dict__[nextKey]
+		else:
+			return NONE
+
+		if len(path) == 1:
+			return v
+		else:
+			if isinstance(v, FlexObject):
+				return v._getByPath(path[1:])
+			else:
+				# path came to an end with a value
+				return NONE
+	#
+
 	def _keys(self):
 		return self.__dict__.keys()
+	#
+
+	def _isEmpty(self):
+		return not bool(self.__dict__)
+	#
+
+	def _hasData(self):
+		return bool(self.__dict__)
+	#
+
+	def _get(self, key):
+		return self.__dict__.get(key)
+	#
+
+	def _values(self):
+		return self.__dict__.values()
+	#
+
+	def _items(self):
+		return self.__dict__.items()
+	#
+
+	def _remove(self, key:str):
+		assert isinstance(key, str)
+
+		if key in self.__dict__.keys():
+			del self.__dict__[key]
+			return True
+		else:
+			return False
+	#
+
+	def _clone(self):
+		return FlexObject(self._toDict())
+	#
+
+	def __valueToJSON(self, value):
+		if isinstance(value, FlexObject):
+			return value._toDict()
+		elif isinstance(value, (tuple, list)):
+			return [
+				self.__valueToJSON(x) for x in value
+			]
+		elif value is NONE:
+			return None
+		else:
+			return value
 	#
 	
 	def _toDict(self) -> dict:
 		ret = {}
 		for key, value in self.__dict__.items():
-			if isinstance(value, FlexObject):
-				ret[key] = value._toDict()
-			elif value is NONE:
-				ret[key] = None
-			else:
-				ret[key] = value
+			ret[key] = self.__valueToJSON(value)
 		return ret
 	#
 
-	def __isObj(self, data, filter:dict):
+	def __isObj(self, data, filter:dict) -> bool:
 		assert isinstance(data, FlexObject)
+		assert isinstance(filter, dict)
 
 		for k, v in filter.items():
 			if k in data.__dict__:
@@ -190,20 +253,20 @@ class FlexObject(object):
 		return self.__getattr__(key)
 	#
 
-	def __setitem__(self, key):
-		return self.__setattr__(key)
+	def __setitem__(self, key, value):
+		return self.__setattr__(key, value)
 	#
 
 	"""
 	def __setattr__(self, key, value):
+		print("XX", value)
 		""
-		v = self.__data.get(key)
+		v = self.__dict__.get(key)
 		if v is None:
 			return NONE
 		else:
 			return v
 		""
-		print("XX", value)
 	#
 	"""
 

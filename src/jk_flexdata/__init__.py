@@ -1,11 +1,15 @@
 ﻿
-import json
-
-import jk_jsoncfghelper2
-
 from .flexdata import FlexObject
 
 
+
+bJSONCfgHelperAvailable = False
+try:
+	import jk_jsoncfghelper2
+	import json
+	bJSONCfgHelperAvailable = True
+except ImportError:
+    pass
 
 
 
@@ -17,23 +21,35 @@ from .flexdata import FlexObject
 # @param	str structureTypeName								The name of the structure type the data should be conform to
 # @return	FlexObject		A <c>FlexObject</c>.
 #
-def loadFromFile(filePath:str, scmgr:jk_jsoncfghelper2.StructureCheckerManager = None, structureTypeName:str = None) -> FlexObject:
+def loadFromFile(filePath:str, scmgr = None, structureTypeName:str = None) -> FlexObject:
 	assert isinstance(filePath, str)
-	if scmgr or structureTypeName:
-		assert isinstance(scmgr, jk_jsoncfghelper2.StructureCheckerManager)
-		assert isinstance(structureTypeName, str)
 
-	with open(filePath, "r") as f:
-		data = json.load(f)
-	assert isinstance(data, dict)
+	if bJSONCfgHelperAvailable:
+		if scmgr or structureTypeName:
+			assert scmgr.__class__.__name__ == "jk_jsoncfghelper2.StructureCheckerManager"
+			assert isinstance(structureTypeName, str)
 
-	if scmgr or structureTypeName:
-		checker = scmgr.get(structureTypeName)
-		if checker.checkB(scmgr, data):
-			return FlexObject(data)
+		with open(filePath, "r") as f:
+			data = json.load(f)
+		assert isinstance(data, dict)
+
+		if scmgr or structureTypeName:
+			checker = scmgr.get(structureTypeName)
+			if checker.checkB(scmgr, data):
+				return FlexObject(data)
+			else:
+				raise Exception("Data does not match type " + repr(structureTypeName))	# TODO
 		else:
-			raise Exception("Data does not match type " + repr(structureTypeName))	# TODO
+			return FlexObject(data)
+
 	else:
+		if (scmgr is not None) or (structureTypeName is not None):
+			raise Exception("As module jk_jsoncfghelper2 is not installed, scmgr and structureTypeName must noe None!")
+
+		with open(filePath, "r") as f:
+			data = json.load(f)
+		assert isinstance(data, dict)
+
 		return FlexObject(data)
 #
 
@@ -45,20 +61,27 @@ def loadFromFile(filePath:str, scmgr:jk_jsoncfghelper2.StructureCheckerManager =
 # @param	str structureTypeName								The name of the structure type the data should be conform to
 # @return	FlexObject		A <c>FlexObject</c>.
 #
-def createFromData(data:dict, scmgr:jk_jsoncfghelper2.StructureCheckerManager = None, structureTypeName:str = None) -> FlexObject:
-	if scmgr or structureTypeName:
-		assert isinstance(scmgr, jk_jsoncfghelper2.StructureCheckerManager)
-		assert isinstance(structureTypeName, str)
-
+def createFromData(data:dict, scmgr = None, structureTypeName:str = None) -> FlexObject:
 	assert isinstance(data, dict)
 
-	if scmgr or structureTypeName:
-		checker = scmgr.get(structureTypeName)
-		if checker.checkB(scmgr, data):
-			return FlexObject(data)
+	if bJSONCfgHelperAvailable:
+		if scmgr or structureTypeName:
+			assert scmgr.__class__.__name__ == "jk_jsoncfghelper2.StructureCheckerManager"
+			assert isinstance(structureTypeName, str)
+
+		if scmgr or structureTypeName:
+			checker = scmgr.get(structureTypeName)
+			if checker.checkB(scmgr, data):
+				return FlexObject(data)
+			else:
+				raise Exception("Data does not match type " + repr(structureTypeName))	# TODO
 		else:
-			raise Exception("Data does not match type " + repr(structureTypeName))	# TODO
+			return FlexObject(data)
+
 	else:
+		if (scmgr is not None) or (structureTypeName is not None):
+			raise Exception("As module jk_jsoncfghelper2 is not installed, scmgr and structureTypeName must noe None!")
+
 		return FlexObject(data)
 #
 
@@ -66,7 +89,7 @@ def createFromData(data:dict, scmgr:jk_jsoncfghelper2.StructureCheckerManager = 
 
 
 
-__version__ = "0.2019.8.22"
 
+__version__ = "0.2019.9.13"
 
 

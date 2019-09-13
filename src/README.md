@@ -1,5 +1,5 @@
 ﻿jk_flexdata
-===========
+==========
 
 Introduction
 ------------
@@ -8,36 +8,31 @@ This python module ...
 
 Information about this module can be found here:
 
-
-* `github.org <https://github.com/jkpubsrc/....>`_
-* `pypi.python.org <https://pypi.python.org/pypi/jk_flexdata>`_
+* [github.org](https://github.com/jkpubsrc/....)
+* [pypi.python.org](https://pypi.python.org/pypi/jk_flexdata)
 
 Why this module?
 ----------------
 
 ...
 
-
 Limitations of this module
 --------------------------
 
 ...
 
-
 How to use this module
 ----------------------
 
-Import this module
-^^^^^^^^^^^^^^^^^^
+### Import this module
 
 Please include this module into your application using the following code:
 
-.. code-block:: python
-
-   impoert jk_flexdata
+```python
+impoert jk_flexdata
+```
 
 ...
-
 
 Contact Information
 -------------------
@@ -46,7 +41,6 @@ This is Open Source code. That not only gives you the possibility of freely usin
 allows you to contribute. Feel free to contact the author(s) of this software listed below, either
 for comments, collaboration requests, suggestions for improvement or reporting bugs:
 
-
 * Jürgen Knauth: jknauth@uni-goettingen.de, pubsrc@binary-overflow.de
 
 License
@@ -54,5 +48,7 @@ License
 
 This software is provided under the following license:
 
-
 * Apache Software License 2.0
+
+
+

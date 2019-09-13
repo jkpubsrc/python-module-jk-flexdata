@@ -38,7 +38,7 @@ x.b = 3
 print(">>8")
 print(x)
 print(">>9")
-print(x.toDict())
+print(x._toDict())
 print(">>10")
 
 print("****************")
