@@ -222,31 +222,33 @@ class FlexObject(object):
 		for k in sorted(self.__dict__.keys()):
 			v = self.__dict__[k]
 			if isinstance(v, (str, float, int, bool)):
-				strings.append("\"" + k + "\" = " + repr(v))
+				strings.append(k + "=" + repr(v))
 			elif isinstance(v, (tuple, list)):
-				strings.append("\"" + k + "\" = []")
+				strings.append(k + "=" + self.__toStrShort(v))
 			elif isinstance(v, FlexObject):
-				strings.append("\"" + k + "\" = ...")
+				strings.append(k + "=...")
 			else:
-				strings.append("\"" + k + "\" = ?")
+				strings.append(k + "=?")
 		s = "F{ " + ", ".join(strings) + " }"
 		return s
 	#
 
 	def __repr__(self):
-		strings = []
-		for k in sorted(self.__dict__.keys()):
-			v = self.__dict__[k]
-			if isinstance(v, (str, float, int, bool)):
-				strings.append("\"" + k + "\" = " + repr(v))
-			elif isinstance(v, (tuple, list)):
-				strings.append("\"" + k + "\" = []")
-			elif isinstance(v, FlexObject):
-				strings.append("\"" + k + "\" = ...")
+		return self.__str__()
+	#
+
+	def __toStrShort(self, values):
+		ret = []
+		for i, v in enumerate(values):
+			if i == 3:
+				ret.append("...")
+				break
 			else:
-				strings.append("\"" + k + "\" = ?")
-		s = "F{ " + ", ".join(strings) + " }"
-		return s
+				if isinstance(v, FlexObject):
+					ret.append("F")
+				else:
+					ret.append(str(v))
+		return "[ " + ", ".join(ret) + " ]"
 	#
 
 	def __getitem__(self, key):
@@ -271,7 +273,7 @@ class FlexObject(object):
 	"""
 
 	def __getattr__(self, key):
-		if key in self.__dict__.keys():
+		if key in self.__dict__:
 			return self.__dict__[key]
 		else:
 			return NONE
