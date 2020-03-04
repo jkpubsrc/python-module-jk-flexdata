@@ -1,5 +1,9 @@
 
 
+import re
+
+
+
 
 
 class _FlexNone(object):
@@ -143,25 +147,47 @@ class FlexObject(object):
 	def __isObj(self, data, filter:dict) -> bool:
 		assert isinstance(data, FlexObject)
 		assert isinstance(filter, dict)
+		assert filter
 
 		for k, v in filter.items():
-			if k in data.__dict__:
-				# 1st attempt
-				v2 = data[k]
-				if v != v2:
-					return False
-			else:
-				if k.startswith("_"):
-					# 2nd attempt
-					k = k[1:]
-					if k in data.__dict__:
-						v2 = data[k]
-						if v != v2:
+			if isinstance(v, re.Pattern):
+				if k in data.__dict__:
+					# 1st attempt
+					v2 = data[k]
+					if v.match(v2) is None:
+						return False
+				else:
+					if k.startswith("_"):
+						# 2nd attempt
+						k = k[1:]
+						if k in data.__dict__:
+							v2 = data[k]
+							if v.match(v2) is None:
+								return False
+						else:
 							return False
 					else:
 						return False
+
+			else:
+				if k in data.__dict__:
+					# 1st attempt
+					v2 = data[k]
+					if v != v2:
+						return False
 				else:
-					return False
+					if k.startswith("_"):
+						# 2nd attempt
+						k = k[1:]
+						if k in data.__dict__:
+							v2 = data[k]
+							if v != v2:
+								return False
+						else:
+							return False
+					else:
+						return False
+
 		return True
 	#
 

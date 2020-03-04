@@ -23,7 +23,7 @@ setup(
 		"License :: OSI Approved :: Apache Software License",
 	],
 	description = "This python module provides a special dictionary like data data structure that can be easily used to access and modify values of configurations and settings.",
-	download_url = "https://github.com/jkpubsrc/python-module-jk-flexdata/tarball/0.2019.10.22",
+	download_url = "https://github.com/jkpubsrc/python-module-jk-flexdata/tarball/0.2020.3.4",
 	include_package_data = False,
 	install_requires = [
 		"jk_testing",
@@ -40,7 +40,7 @@ setup(
 		"jk_flexdata",
 	],
 	url = "https://github.com/jkpubsrc/python-module-jk-flexdata",
-	version = "0.2019.10.22",
+	version = "0.2020.3.4",
 	zip_safe = False,
 	long_description = readme(),
 	long_description_content_type="text/markdown",

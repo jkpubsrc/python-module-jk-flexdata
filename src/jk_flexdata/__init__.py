@@ -94,5 +94,4 @@ def createFromData(data:dict, scmgr = None, structureTypeName:str = None) -> Fle
 
 
 
-__version__ = "0.2019.10.22"
-
+__version__ = "0.2020.3.4"
