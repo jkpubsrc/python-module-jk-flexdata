@@ -150,7 +150,7 @@ class FlexObject(object):
 		assert filter
 
 		for k, v in filter.items():
-			if isinstance(v, re.Pattern):
+			if v.__class__.__name__.endswith("Pattern"):
 				if k in data.__dict__:
 					# 1st attempt
 					v2 = data[k]

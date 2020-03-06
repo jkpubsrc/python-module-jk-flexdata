@@ -1,7 +1,7 @@
 {
 	"language": "python3",
 	"name": "jk_flexdata",
-	"version": "0.2020.3.4",
+	"version": "0.2020.3.6",
 	"meta": {
 		"description": "This python module provides a special dictionary like data data structure that can be easily used to access and modify values of configurations and settings.",
 		"keywords": [
