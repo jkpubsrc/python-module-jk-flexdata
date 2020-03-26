@@ -40,6 +40,10 @@ class _FlexNone(object):
 		return "None"
 	#
 
+	def __iter__(self):
+		return [].__iter__()
+	#
+
 #
 
 NONE = _FlexNone()
