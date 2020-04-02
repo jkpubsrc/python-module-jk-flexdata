@@ -52,8 +52,11 @@ NONE = _FlexNone()
 
 class FlexObject(object):
 
-	def __init__(self, data:dict):
-		assert isinstance(data, dict)
+	def __init__(self, data:dict = None):
+		if data is None:
+			data = {}
+		else:
+			assert isinstance(data, dict)
 
 		for key, value in list(data.items()):
 			if isinstance(value, dict):
@@ -326,6 +329,10 @@ class FlexObject(object):
 				self.__dict__[key] = _
 			else:
 				self.__dict__[key] = value
+	#
+
+	def __iter__(self):
+		return self.__dict__.__iter__()
 	#
 
 #
