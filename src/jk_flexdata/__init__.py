@@ -3,7 +3,11 @@
 
 from jk_testing import Assert
 
-from .flexdata import FlexObject
+from .flexdata import FlexObject, NONE
+from .FlexDataSelector import FlexDataSelector
+
+
+
 
 
 
@@ -94,4 +98,4 @@ def createFromData(data:dict, scmgr = None, structureTypeName:str = None) -> Fle
 
 
 
-__version__ = "0.2020.4.2"
+__version__ = "0.2020.4.3"
