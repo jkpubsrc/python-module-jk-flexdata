@@ -29,10 +29,10 @@ class FlexDataSelector(object):
 		return self.__path
 	#
 
-	def __recursiveSelect(self, pathParts:list, currentElement):
+	def __recursiveSelect(self, existingPath:list, pathParts:list, currentElement):
 		if not pathParts:
 			# we're at the end of a path => we return this item.
-			yield "|" + "|".join(pathParts), currentElement
+			yield ("|" + "|".join([ str(x) for x in existingPath ])), currentElement
 			return
 
 		# now let's have a look at the next item
@@ -43,8 +43,12 @@ class FlexDataSelector(object):
 			# we search for multiple nodes in a list
 			if isinstance(currentElement, list):
 				# yes, this is a list
+				n = 0
 				for item in currentElement:
-					yield from self.__recursiveSelect(pathParts[1:], item)
+					existingPath.append(n)
+					yield from self.__recursiveSelect(existingPath, pathParts[1:], item)
+					del existingPath[-1]
+					n += 1
 			else:
 				# no, this is not a list => ignore this element
 				pass
@@ -54,7 +58,9 @@ class FlexDataSelector(object):
 			if isinstance(currentElement, list):
 				# yes, this is a list
 				if (currentPathPart >= 0) and (currentPathPart < len(currentElement)):
-					yield from self.__recursiveSelect(pathParts[1:], currentElement[currentPathPart])
+					existingPath.append(currentPathPart)
+					yield from self.__recursiveSelect(existingPath, pathParts[1:], currentElement[currentPathPart])
+					del existingPath[-1]
 			else:
 				# no, this is not a list => ignore this element
 				pass
@@ -66,7 +72,9 @@ class FlexDataSelector(object):
 				# we can descend
 				v = currentElement[currentPathPart]
 				if currentPathPart in currentElement:
-					yield from self.__recursiveSelect(pathParts[1:], currentElement[pathParts[0]])
+					existingPath.append(currentPathPart)
+					yield from self.__recursiveSelect(existingPath, pathParts[1:], currentElement[pathParts[0]])
+					del existingPath[-1]
 			else:
 				# no, this is not a FlexObject => ignore this element
 				pass
@@ -76,11 +84,11 @@ class FlexDataSelector(object):
 	#
 
 	def getAll(self, dataTree:FlexObject):
-		yield from self.__recursiveSelect(self.pathParts, dataTree)
+		yield from self.__recursiveSelect([], self.pathParts, dataTree)
 	#
 
 	def getOne(self, dataTree:FlexObject):
-		for spath, result in self.__recursiveSelect(self.pathParts, dataTree):
+		for spath, result in self.__recursiveSelect([], self.pathParts, dataTree):
 			return spath, result
 		return None, None
 	#
