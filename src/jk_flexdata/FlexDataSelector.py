@@ -36,12 +36,12 @@ class FlexDataSelector(object):
 			return
 
 		# now let's have a look at the next item
-		#print("-", pathParts, "-", bool(pathParts), "-", len(pathParts))
 		currentPathPart = pathParts[0]
+		#print("->", currentPathPart)
 
 		if currentPathPart == "*":
 			# we search for multiple nodes in a list
-			if isinstance(currentElement, list):
+			if isinstance(currentElement, (tuple, list)):
 				# yes, this is a list
 				n = 0
 				for item in currentElement:
@@ -49,8 +49,15 @@ class FlexDataSelector(object):
 					yield from self.__recursiveSelect(existingPath, pathParts[1:], item)
 					del existingPath[-1]
 					n += 1
+			elif isinstance(currentElement, FlexObject):
+				# yes, this is a dictionary
+				for k in currentElement:
+					item = currentElement[k]
+					existingPath.append(k)
+					yield from self.__recursiveSelect(existingPath, pathParts[1:], item)
+					del existingPath[-1]
 			else:
-				# no, this is not a list => ignore this element
+				# no, this is not a list and not a dictionary => ignore this element
 				pass
 
 		elif isinstance(currentPathPart, int):
