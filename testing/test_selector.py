@@ -48,13 +48,13 @@ PATTERNS = [
 
 for p in PATTERNS:
 	if len(p) == 2:
-		result = FlexDataSelector(p[0]).getOne(dataTree)
+		spath, result = FlexDataSelector(p[0]).getOne(dataTree)
 		if p[1] is None:
 			Assert.isNone(result)
 		else:
 			Assert.isInstance(result, p[1])
 	elif len(p) == 3:
-		result = FlexDataSelector(p[0]).getOne(dataTree)
+		spath, result = FlexDataSelector(p[0]).getOne(dataTree)
 		if p[1] is None:
 			Assert.isNone(result)
 		else:

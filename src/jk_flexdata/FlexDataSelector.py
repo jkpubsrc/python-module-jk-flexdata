@@ -22,14 +22,21 @@ class FlexDataSelector(object):
 				self.pathParts.append(n)
 			except:
 				self.pathParts.append(item)
+		self.__path = path
+	#
+
+	def __str__(self):
+		return self.__path
 	#
 
 	def __recursiveSelect(self, pathParts:list, currentElement):
 		if not pathParts:
 			# we're at the end of a path => we return this item.
-			yield currentElement
+			yield "|" + "|".join(pathParts), currentElement
+			return
 
 		# now let's have a look at the next item
+		#print("-", pathParts, "-", bool(pathParts), "-", len(pathParts))
 		currentPathPart = pathParts[0]
 
 		if currentPathPart == "*":
@@ -73,9 +80,9 @@ class FlexDataSelector(object):
 	#
 
 	def getOne(self, dataTree:FlexObject):
-		for result in self.__recursiveSelect(self.pathParts, dataTree):
-			return result
-		return None
+		for spath, result in self.__recursiveSelect(self.pathParts, dataTree):
+			return spath, result
+		return None, None
 	#
 
 #
