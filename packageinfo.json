@@ -1,56 +1,43 @@
 {
-	"language": "python3",
-	"name": "jk_flexdata",
-	"version": "0.2020.4.4",
+	"magic": {
+		"magic": "packageinfo",
+		"version": 2
+	},
 	"meta": {
+		"authors": [
+			{
+				"email": "pubsrc@binary-overflow.de",
+				"name": "J\u00fcrgen Knauth"
+			}
+		],
 		"description": "This python module provides a special dictionary like data data structure that can be easily used to access and modify values of configurations and settings.",
+		"development_status": "stable",
 		"keywords": [
 			"dictionary",
 			"dict",
 			"json",
 			"configuration"
 		],
-		"license": "Apache 2.0",
-		"development_status": "stable",
-		"authors": [
-			{
-				"name": "Jürgen Knauth",
-				"email": "pubsrc@binary-overflow.de"
-			}
-		],
-		"wiki": {
-			"page": "DevDocs:jk_flexdata"
-		}
-	},
-	"repositories": [
-		{
-			"type": "github",
-			"user": "jkpubsrc",
-			"project": "python-module-jk-flexdata",
-			"devon_publish": false
-		},
-		{
-			"type": "pypy",
-			"project": "jk-flexdata",
-			"devon_publish": false
-		}
-	],
-	"source": {
-		"packages": [
-			"jk_flexdata"
-		],
-		"extra_data_files": [
-		]
+		"language": "python3",
+		"license": "Apache2",
+		"name": "jk_flexdata",
+		"packageClass": "python-module",
+		"version": "0.2022.4.10"
 	},
 	"requirements": {
+		"htmlcssjs_packages": [],
 		"python_packages": [
 			"jk_testing"
 		],
-		"python_packages_optional": [
-			"jk_jsoncfghelper2"
-		],
-		"python_packages_dev": [
+		"python_packages_dev": [],
+		"python_packages_recommended": [],
+		"system_apt_packages": []
+	},
+	"source": {
+		"extra_binary_files": [],
+		"extra_data_files": [],
+		"packages": [
+			"jk_flexdata"
 		]
 	}
 }
-

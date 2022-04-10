@@ -21,9 +21,9 @@ setup(
 	classifiers = [
 		"Development Status :: 5 - Production/Stable",
 		"License :: OSI Approved :: Apache Software License",
+		"Programming Language :: Python :: 3",
 	],
 	description = "This python module provides a special dictionary like data data structure that can be easily used to access and modify values of configurations and settings.",
-	download_url = "https://github.com/jkpubsrc/python-module-jk-flexdata/tarball/0.2020.4.4",
 	include_package_data = False,
 	install_requires = [
 		"jk_testing",
@@ -34,14 +34,19 @@ setup(
 		"json",
 		"configuration",
 	],
-	license = "Apache 2.0",
+	license = "Apache2",
 	name = "jk_flexdata",
+	package_data = {
+		"": [
+		],
+	},
 	packages = [
 		"jk_flexdata",
 	],
-	url = "https://github.com/jkpubsrc/python-module-jk-flexdata",
-	version = "0.2020.4.4",
+	scripts = [
+	],
+	version = '0.2022.4.10',
 	zip_safe = False,
 	long_description = readme(),
-	long_description_content_type="text/markdown",
+	long_description_content_type = "text/markdown",
 )

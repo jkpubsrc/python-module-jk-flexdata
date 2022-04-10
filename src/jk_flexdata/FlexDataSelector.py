@@ -1,7 +1,8 @@
 
 
+import typing
 
-from jk_flexdata import *
+from .flexdata import FlexObject
 
 
 
@@ -94,7 +95,7 @@ class FlexDataSelector(object):
 		yield from self.__recursiveSelect([], self.pathParts, dataTree)
 	#
 
-	def getOne(self, dataTree:FlexObject):
+	def getOne(self, dataTree:FlexObject) -> tuple:
 		for spath, result in self.__recursiveSelect([], self.pathParts, dataTree):
 			return spath, result
 		return None, None
