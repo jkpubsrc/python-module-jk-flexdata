@@ -2,11 +2,9 @@
 
 
 __author__ = "Jürgen Knauth"
-__version__ = "0.2022.4.10"
+__version__ = "0.2025.3.2"
 
 
-
-from jk_testing import Assert
 
 from .flexdata import FlexObject, NONE
 from .FlexDataSelector import FlexDataSelector
@@ -39,8 +37,10 @@ def loadFromFile(filePath:str, scmgr = None, structureTypeName:str = None) -> Fl
 
 	if bJSONCfgHelperAvailable:
 		if scmgr or structureTypeName:
-			Assert.isIn(scmgr.__class__.__name__, [ "StructureCheckerManager", "jk_jsoncfghelper2.StructureCheckerManager" ])
-			Assert.isInstance(structureTypeName, str)
+			# Assert.isIn(scmgr.__class__.__name__, [ "StructureCheckerManager", "jk_jsoncfghelper2.StructureCheckerManager" ])
+			assert scmgr.__class__.__name__ in ( "StructureCheckerManager", "jk_jsoncfghelper2.StructureCheckerManager" )
+			# Assert.isInstance(structureTypeName, str)
+			assert isinstance(structureTypeName, str)
 
 		with open(filePath, "r") as f:
 			data = json.load(f)
@@ -79,8 +79,10 @@ def createFromData(data:dict, scmgr = None, structureTypeName:str = None) -> Fle
 
 	if bJSONCfgHelperAvailable:
 		if scmgr or structureTypeName:
-			Assert.isIn(scmgr.__class__.__name__, [ "StructureCheckerManager", "jk_jsoncfghelper2.StructureCheckerManager" ])
-			Assert.isInstance(structureTypeName, str)
+			# Assert.isIn(scmgr.__class__.__name__, [ "StructureCheckerManager", "jk_jsoncfghelper2.StructureCheckerManager" ])
+			assert scmgr.__class__.__name__ in ( "StructureCheckerManager", "jk_jsoncfghelper2.StructureCheckerManager" )
+			# Assert.isInstance(structureTypeName, str)
+			assert isinstance(structureTypeName, str)
 
 		if scmgr or structureTypeName:
 			checker = scmgr.getE(structureTypeName)

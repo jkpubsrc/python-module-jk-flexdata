@@ -22,7 +22,7 @@
 		"license": "Apache2",
 		"name": "jk_flexdata",
 		"packageClass": "python-module",
-		"version": "0.2022.4.10"
+		"version": "0.2025.3.2"
 	},
 	"requirements": {
 		"htmlcssjs_packages": [],
